@@ -1,0 +1,94 @@
+.project-container {
+  background-color: #f8f8f8;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  // height: 100vh;
+  .content {
+    padding: 50px;
+    padding-bottom: 20px;
+    .header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-bottom: 30px;
+      h1 {
+        color: #949494;
+        font-size: 27px;
+        font-weight: 600;
+      }
+      button {
+        background-color: #0e6d9e;
+        padding: 15px 25px 15px 25px;
+        border-radius: 50px;
+        border-width: 0px;
+        margin-left: 10px;
+        h4 {
+          color: white;
+        }
+      }
+    }
+    .listing-container {
+      // height: 63vh;
+      // height: 450px;
+      background-color: #ffffff;
+      // border: 10px 11px  dashed white;
+      border: 1px solid #dbdbdb;
+      border-radius: 10px;
+      margin: 20px 0px 20px 0px;
+      padding-bottom: 126px;
+      .card {
+        height: 80px;
+
+        padding: 0px 30px 0px 30px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #dbdbdb;
+
+        .info {
+          h3 {
+            font-size: 17px;
+            font-weight: 500px;
+            margin-bottom: 5px;
+          }
+          h5 {
+            font-weight: 400;
+            color: #aeaeae;
+          }
+        }
+        .actions {
+          display: flex;
+          flex-direction: row;
+          span {
+            font-size: 20px;
+            font-weight: 100;
+            h6 {
+              margin-left: 40px;
+              color: #84091c;
+              font-weight: 500;
+            }
+          }
+        }
+      }
+    }
+    .footer {
+      margin-top: 50px;
+      text-align: center;
+
+      h4 {
+        font-size: 13px;
+        margin-bottom: 2px;
+        color: #c7c7c7;
+      }
+      h2 {
+        font-size: 21px;
+        color: #787878;
+      }
+    }
+  }
+}

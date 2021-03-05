@@ -1,0 +1,18 @@
+// Imports
+// @import "~bootstrap/scss/bootstrap.scss";
+@import './colors';
+@import './helpers';
+@import './reset';
+
+// Screens
+@import './home/main';
+@import './project/main';
+
+#root {
+  background-color: blue;
+}
+
+.footer {
+  background-color: pink;
+  margin: 200;
+}

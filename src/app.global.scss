@@ -1,0 +1,12 @@
+// Imports
+@import './styles/colors';
+@import './styles/helpers';
+@import './styles/reset';
+
+// Screens
+@import './styles/home/main';
+@import './styles/project/main';
+
+#root {
+  background-color: blue;
+}
