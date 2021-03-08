@@ -16,26 +16,34 @@ import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
 
-// let { exec } = require('child_process');
+let { exec } = require('child_process');
 
-// console.log(`${process.cwd()}/projects/abc.txt`, 'samuns>>S>Fdfdgdgrgfg');
+console.log(`${process.cwd()}/projects/abc.txt`, 'samuns>>S>Fdfdgdgrgfg');
 
-// // create project script
+// create project script
+async function createproject(path, name, event) {
+  event.reply('acknoledgement', { loading: true });
 
-// exec(
-//   ' cd .. && cd auto-project && npx react-native init testApp',
-//   (error: any, stdout: any, stderr: any) => {
-//     if (error) {
-//       console.log(`error: ${error.message}`);
-//       return;
-//     }
-//     if (stderr) {
-//       console.log(`stderr: ${stderr}`);
-//       return;
-//     }
-//     console.log(`stdout: ${stdout}`);
-//   }
-// );
+  exec(
+    ` cd .. && cd ${path} && npx react-native init ${name}`,
+    (error: any, stdout: any, stderr: any) => {
+      if (error) {
+        console.log(`error: ${error.message}`);
+        return;
+      }
+      if (stderr) {
+        console.log(`stderr: ${stderr}`);
+        return;
+      }
+      if (stdout) {
+        console.log('=============Project Created Succesfuly===========');
+        event.reply('project-complete', { path, name });
+        event.reply('acknoledgement', { loading: false });
+        console.log(`stdout: ${stdout}`);
+      }
+    }
+  );
+}
 
 // // clean node_modules and pod project script
 
@@ -67,6 +75,7 @@ export default class AppUpdater {
 }
 
 let mainWindow: BrowserWindow | null = null;
+let addProject;
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
@@ -164,16 +173,19 @@ ipcMain.on('open-error', () => {
   dialog.showErrorBox('erroe', 'sssdd');
 });
 let dir;
-ipcMain.on('open-project-path', () => {
+ipcMain.on('open-project-path', (event, arg) => {
   dir = dialog
     .showOpenDialog(mainWindow, {
       properties: ['openDirectory'],
       buttonLabel: 'choose project path',
     })
-    .then((res) => {
-      console.log('path', res);
+    .then(async (res) => {
+      if (!res.canceled) {
+        createproject(res.filePaths[0], arg, event);
+      }
     });
 });
+
 app.on('window-all-closed', () => {
   // Respect the OSX convention of having the application in memory even
   // after all windows have been closed
@@ -183,6 +195,19 @@ app.on('window-all-closed', () => {
 });
 
 app.whenReady().then(createWindow).catch(console.log);
+ipcMain.on('add-project', () => {
+  // addProject = new BrowserWindow({
+  //   // parent: mainWindow,
+  //   // width: 100,
+  //   // height: 100,
+  //   resizable: false,
+  //   title: 'Add Project',
+  // });
+  // let name = prompt('Enter project name');
+  // addProject.loadURL(`file://${__dirname}/index.html`);
+  // addProject.show();
+  // addProject.setAlwaysOnTop(true);
+});
 
 app.on('activate', () => {
   // On macOS it's common to re-create a window in the app when the
