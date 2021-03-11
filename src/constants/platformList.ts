@@ -1,54 +1,55 @@
-import { iconPath } from "./iconPath";
+import { iconPath } from './iconPath';
 
-export const platformList = [
+const platformList = [
   {
     id: 1,
-    name: "React",
+    name: 'React',
     icon: iconPath.RECAT_ICON,
   },
   {
     id: 2,
-    name: "Angular",
+    name: 'Angular',
     icon: iconPath.ANGULAR_ICON,
   },
   {
     id: 3,
-    name: "Electron",
+    name: 'Electron',
     icon: iconPath.ELECTRON_ICON,
   },
   {
     id: 4,
-    name: "Vue",
+    name: 'Vue',
     icon: iconPath.VUE_ICON,
   },
   {
     id: 5,
-    name: "Laravel",
+    name: 'Laravel',
     icon: iconPath.LARAVEL_ICON,
   },
   {
     id: 6,
-    name: "CodeIgniter",
+    name: 'CodeIgniter',
     icon: iconPath.CODEIGNITER_ICON,
   },
   {
     id: 7,
-    name: "Mern",
+    name: 'Mern',
     icon: iconPath.MERN_ICON,
   },
   {
     id: 8,
-    name: "Mean",
+    name: 'Mean',
     icon: iconPath.MEAN_ICON,
   },
   {
     id: 9,
-    name: "Node",
+    name: 'Node',
     icon: iconPath.NODE_ICON,
   },
   {
     id: 10,
-    name: "Express",
+    name: 'Express',
     icon: iconPath.EXPRESS_ICON,
   },
 ];
+export default platformList;

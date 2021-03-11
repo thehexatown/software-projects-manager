@@ -125,53 +125,30 @@ export default function Projects() {
   const openProject = () => {
     ipcRenderer.send('open-project');
   };
+  const cleanProjects = () => {
+    if (selectedprojects.length > 0)
+      ipcRenderer.send('clean-all-selected-modules', selectedprojects);
+  };
   const scanProjects = () => {
     ipcRenderer.send('scan-projects');
   };
   const selectProjects = (data, das) => {};
 
   const onCheck = (data, val) => {
+    // const temp = [];
+    data.isCheck = val;
     if (val) {
       selectedprojects.push(data);
       setSelectedProjects(selectedprojects);
-    } else {
-      for (var arr in selectedprojects) {
-        if (arr.path === data.path) {
-          console.log(data);
-        }
-      }
     }
-    // selectedprojects.push(data);
-    // setSelectedProjects(selectedprojects);
-    // data.delete(name);
-    // sele.push(data);
-    // setSelectedProjects(selectProjects);
-    // console.log(selectedprojects);
-    // console.log(data.path, 'found');
-    // selectedprojects.forEach((item) => {
-    //   console.log(item,"noo");
-    //   // if (item.path !== data.path) console.log(data);
-    //   //  fruite.isChecked =  event.target.checked
-    // });
-    // this.setState({ fruites });
-    // selectProjects.push()
-    // setSelectedProjects()
-
-    // data.isSelected = true;
-    // projectsList.electron.forEach(() => {
-    //   // console.log('uuuu', projectsList);
-    //   //   if (fruite.value === event.target.value)
-    //   //     fruite.isChecked = event.target.checked;
-    // });
-    // });
-
-    // selectProjects?.forEach((fruite) => {
-    //   if (fruite.value === event.target.value)
-    //     fruite.isChecked = event.target.checked;
-    // });
-    // setSelectedProjects(selectProjects);
-    // console.log("ssdd",selectedprojects)
+    if (!val) {
+      const uncheck = selectedprojects.filter((item) => item.path != data.path);
+      const index = selectedprojects.indexOf(data);
+      selectedprojects.splice(index, 1);
+      setSelectedProjects(selectedprojects);
+    }
   };
+  console.log('aha', selectedprojects);
   return (
     <div className="project-container">
       {IsLoading && (
@@ -209,30 +186,25 @@ export default function Projects() {
           <div className="btn-container">
             {select && (
               <>
-                <button
-                  onClick={selectProjects}
-                  // onClick={()=>history.push('/home')}
-                >
+                <button onClick={cleanProjects}>
                   <h4>Clean Projects </h4>
                 </button>
                 <button
                   onClick={selectProjects}
-                  // onClick={()=>history.push('/home')}
+                  onClick={() => {
+                    const temp = [];
+                    setSelectedProjects(temp);
+                    setSelect((prev) => !prev);
+                  }}
                 >
                   <h4>Cancell selected </h4>
                 </button>
               </>
             )}
-            <button
-              // onClick={selectProjects}
-              onClick={() => setSelect((prev) => !prev)}
-            >
+            <button onClick={() => setSelect((prev) => !prev)}>
               <h4>Select Projects </h4>
             </button>
-            <button
-              onClick={scanProjects}
-              // onClick={()=>history.push('/home')}
-            >
+            <button onClick={scanProjects}>
               <h4>Scan Projects</h4>
             </button>
             <button
@@ -251,6 +223,7 @@ export default function Projects() {
           openPath={onExplore}
           onDeleteNodeModules={onDeleteNodeModules}
           showSelect={select}
+          cancellAllSelected={selectedprojects.length === 0}
           onCheck={onCheck}
         />
         <div className="footer">

@@ -1,6 +1,5 @@
 import React from 'react';
 import CheckBox from '../../components/CheckBox';
-import { PROJECT_LISTING } from '../../constants/mock';
 
 const ListingCard = ({
   projects,
@@ -8,10 +7,9 @@ const ListingCard = ({
   openPath,
   onDeleteNodeModules,
   onCheck,
+  cancellAllSelected,
   ...props
 }) => {
-  // console.log('tvk', ;
-  console.log('ListingCard', { projects });
   return (
     <div className="listing-container">
       {projects &&
@@ -21,6 +19,8 @@ const ListingCard = ({
               {showSelect && (
                 <div className="">
                   <CheckBox
+                    id={`checkbox-id${item.path}`}
+                    cancellAllSelected={cancellAllSelected}
                     onCheck={(event) => onCheck(item, event.target.checked)}
                   />
                 </div>

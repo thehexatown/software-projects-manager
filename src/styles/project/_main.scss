@@ -1,5 +1,6 @@
-@import './popup';
 @import './terminal';
+@import '../../components/popUp/popup';
+@import './popup';
 
 .project-container {
   background-color: #f8f8f8;
@@ -61,7 +62,6 @@
           flex-direction: row;
           align-items: center;
           h3 {
-
             font-size: 17px;
             font-weight: 500px;
             margin-bottom: 5px;
@@ -71,7 +71,6 @@
             font-weight: 400;
             color: #aeaeae;
             margin-left: 15px;
-
           }
         }
         .actions {

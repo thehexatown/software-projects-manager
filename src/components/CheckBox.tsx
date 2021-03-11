@@ -6,7 +6,7 @@ export const CheckBox = (props) => {
       key={props.id}
       onClick={props.onCheck}
       type="checkbox"
-      // checked={true}
+      // checked={props.cancellAllSelected ? false : undefined}
       value={props.value}
     />
   );

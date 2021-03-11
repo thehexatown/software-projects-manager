@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { platformList } from '../../constants/configuration';
+import platformList from '../../constants/platformList';
 
 export default function Home() {
   return (
