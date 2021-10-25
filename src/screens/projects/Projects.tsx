@@ -32,12 +32,10 @@ export default function Projects() {
       };
     }
     setProjectList(record);
-    console.log('projects array', record);
     localStorage.setItem('projects', JSON.stringify(record));
 
     ipcRenderer.on('project-complete', (event, arg) => {
       if (arg.path && arg.name) {
-        console.log('Hi', arg.path, arg.name);
         let record = JSON.parse(localStorage.getItem('projects'));
         if (!record) {
           record = {
@@ -50,14 +48,13 @@ export default function Projects() {
         const temp = record.electron;
         temp.push(arg);
         record.electron = temp;
+        console.log(temp);
         setProjectList(record);
-        // console.log('temp', record);
         localStorage.setItem('projects', JSON.stringify(record));
       }
     });
     ipcRenderer.on('acknoledgement', (event, arg) => {
       const { loading } = arg;
-      console.log(arg);
       setIsloading(loading);
     });
     ipcRenderer.on('creating-project-progress', (event, arg) => {
@@ -69,13 +66,13 @@ export default function Projects() {
         const previous = JSON.parse(localStorage.getItem('projects'));
         const union = _.unionBy(projects, previous.electron, 'path');
         previous.electron = union;
+        console.log(previous);
         setProjectList(previous);
         localStorage.setItem('projects', JSON.stringify(previous));
       }
     });
     ipcRenderer.on('project-found', (event, arg) => {
       const { projects } = arg;
-      console.log('found ', projects);
       if (arg) {
         const previous = JSON.parse(localStorage.getItem('projects'));
         const union = _.unionBy(projects, previous.electron, 'path');
@@ -132,6 +129,7 @@ export default function Projects() {
   const scanProjects = () => {
     ipcRenderer.send('scan-projects');
   };
+
   const selectProjects = (data, das) => {};
 
   const onCheck = (data, val) => {
@@ -148,7 +146,7 @@ export default function Projects() {
       setSelectedProjects(selectedprojects);
     }
   };
-  console.log('aha', selectedprojects);
+
   return (
     <div className="project-container">
       {IsLoading && (
@@ -197,7 +195,7 @@ export default function Projects() {
                     setSelect((prev) => !prev);
                   }}
                 >
-                  <h4>Cancell selected </h4>
+                  <h4>Cancel selected </h4>
                 </button>
               </>
             )}
@@ -214,7 +212,7 @@ export default function Projects() {
               <h4>Open Project</h4>
             </button>
             <button onClick={newproject}>
-              <h4>NEW PROJECT</h4>
+              <h4>New Project</h4>
             </button>
           </div>
         </div>

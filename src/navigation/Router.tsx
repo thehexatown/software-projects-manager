@@ -7,13 +7,9 @@ import Project from '../screens/projects/Projects';
 export default function MianRouter() {
   return (
     <HashRouter>
-      <div>
-        <main>
-          <Route path="/home" component={Home} />
-          <Route path="/project" component={Project} />
-          <Route exact path="/" component={Home} />
-        </main>
-      </div>
+      <Route path="/home" component={Home} />
+      <Route path="/project" component={Project} />
+      <Route exact path="/" component={Home} />
     </HashRouter>
   );
 }

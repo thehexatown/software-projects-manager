@@ -32,16 +32,20 @@ const ListingCard = ({
             </div>
             <div className="actions">
               {item && (
-                <span onClick={() => openPath(item)}>
-                  <h6 style={{ color: '#303030' }}>OPEN</h6>
-                </span>
+                <button
+                  onClick={() => openPath(item)}
+                  style={{ color: '#303030' }}
+                >
+                  OPEN
+                </button>
               )}
 
-              <span onClick={() => onDeleteNodeModules(item)}>
-                <h6 style={{ color: item.id > 2 ? '#E5E5E5' : undefined }}>
-                  CLEAN
-                </h6>
-              </span>
+              <button
+                onClick={() => onDeleteNodeModules(item)}
+                style={{ color: item.id > 2 ? '#E5E5E5' : undefined }}
+              >
+                CLEAN
+              </button>
             </div>
           </div>
         ))}
